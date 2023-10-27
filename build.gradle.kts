@@ -36,6 +36,16 @@ subprojects {
   group = "org.jetbrains.projector"
 
   repositories {
+    val codingArtifactsRepoUrl: String by project
+    val codingArtifactsGradleUsername: String by project
+    val codingArtifactsGradlePassword: String by project
+    maven{
+      url = uri(codingArtifactsRepoUrl)
+      credentials {
+        username = codingArtifactsGradleUsername
+        password = codingArtifactsGradlePassword
+      }
+    }
     mavenCentral()
     maven("https://jitpack.io")
     maven("https://www.jetbrains.com/intellij-repository/releases")

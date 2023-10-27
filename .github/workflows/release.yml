@@ -10,16 +10,19 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+      - name: Version String
+        id: version_str
+        run: echo ::set-output name=VERSION_STR::${GITHUB_REF#refs/tags/v}
       - name: Checkout code
         uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
-      - name: Setup Java 17
+      - name: Setup Java 11
         uses: actions/setup-java@v1
         with:
-          java-version: '17'
+          java-version: '11'
       - name: Build project
         run: |
-          ./gradlew :projector-server:distZip
+          ./gradlew :projector-server:distZip -Pversion=${{steps.version_str.outputs.VERSION_STR }} -PcodingArtifactsGradleUsername=${{ secrets.MAVEN_USERNAME }} -PcodingArtifactsGradlePassword=${{ secrets.MAVEN_PASSWORD }}
           cd projector-server/build/distributions
           find . -maxdepth 1 -type f -name projector-server-*.zip -exec mv {} projector-server.zip \;
       - name: Create Release
