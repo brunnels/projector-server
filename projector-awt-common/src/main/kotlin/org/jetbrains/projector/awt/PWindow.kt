@@ -121,6 +121,16 @@ class PWindow private constructor(val target: Component, private val isAgent: Bo
     graphics = graphicsOverride ?: PGraphics2D(target, Descriptor(id))
 
     updateGraphics()
+    // logger.info {"PWindow init begin"}
+    if(isAutoRequestFocus) {
+      // logger.info{"PWindow isAutoRequestFocus true"}
+      // target.requestFocusInWindow()
+      if (target is Window){
+        // logger.info{"PWindow target is Window true"}
+        Toolkit.getDefaultToolkit().systemEventQueue.postEvent(WindowEvent(target, WindowEvent.WINDOW_GAINED_FOCUS))
+      }
+    }
+    // logger.info{"PWindow init end"}
   }
 
   fun transferNativeFocus() {
