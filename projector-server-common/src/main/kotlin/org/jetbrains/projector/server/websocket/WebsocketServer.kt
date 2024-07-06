@@ -35,7 +35,7 @@ import org.jetbrains.projector.util.loading.getOption
 import org.jetbrains.projector.util.logging.Logger
 
 object WebsocketServer {
-  internal fun createTransportBuilders(getLastUserActionTimeStampMs: () -> Long): List<WsTransportBuilder> {
+  internal fun createTransportBuilders(): List<WsTransportBuilder> {
     val builders = arrayListOf<WsTransportBuilder>()
 
     val relayUrl = getOption(RELAY_PROPERTY_NAME)
@@ -68,7 +68,6 @@ object WebsocketServer {
           )
         }
       }
-      serverBuilder.getLastUserActionTimeStampMs = getLastUserActionTimeStampMs
 
       builders.add(serverBuilder)
     }

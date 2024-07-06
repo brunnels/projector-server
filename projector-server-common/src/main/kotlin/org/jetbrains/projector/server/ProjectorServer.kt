@@ -341,8 +341,6 @@ class ProjectorServer private constructor(
     return allEvents
   }
 
-  private var lastUserActionTimeStampMs: Long = 0L
-
   private fun processMessage(clientSettings: ReadyClientSettings, message: ClientEvent) {
     if (
       !clientSettings.setUpClientData.hasWriteAccess &&
@@ -350,10 +348,6 @@ class ProjectorServer private constructor(
       message !is ClientRequestPingEvent
     ) {
       return
-    }
-
-    if (message is ClientUserEvent) {
-      lastUserActionTimeStampMs = System.currentTimeMillis()
     }
 
     Do exhaustive when (message) {
@@ -725,9 +719,8 @@ class ProjectorServer private constructor(
   fun start() {
     updateThread = createUpdateThread()
     caretInfoUpdater.start()
-    lastUserActionTimeStampMs = System.currentTimeMillis()
 
-    WebsocketServer.createTransportBuilders(getLastUserActionTimeStampMs = ::lastUserActionTimeStampMs).forEach {
+    WebsocketServer.createTransportBuilders().forEach {
       addTransport(it.attachDefaultServerEventHandlers(clientEventHandler).build())
     }
   }
@@ -759,7 +752,6 @@ class ProjectorServer private constructor(
   fun stop(timeout: Int = 0) {
     transports.forEach { it.stop(timeout) }
     transports.clear()
-    lastUserActionTimeStampMs = 0L
     caretInfoUpdater.stop()
 
     if (::updateThread.isInitialized) {
