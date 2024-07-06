@@ -203,7 +203,13 @@ class ProjectorServer private constructor(
             toServerMessageDecoder.decode(decompressed)
           }
 
-          events.forEach { processMessage(clientSettings, it) }
+          events.forEach { 
+            try {
+              processMessage(clientSettings, it)
+            } catch (t: Throwable) {
+                logger.error(t) { "Unhandled event Exception in daemon thread has happened" }
+            }
+          }
         }
 
         is ClosedClientSettings -> {
