@@ -1,4 +1,5 @@
-# Unreleased
+## 1.8.2
+- Updated actions for new release
 
 ## 1.8.1
 - PRJ-857 window disappear
