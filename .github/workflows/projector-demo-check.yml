@@ -18,7 +18,7 @@ jobs:
 
       - run: |
           cd ..
-          git clone https://github.com/JetBrains/projector-demo.git
+          git clone https://github.com/brunnels/projector-demo.git
           cd projector-demo
           echo projectorServerSource=local > local.properties
       - run: ./gradlew clean

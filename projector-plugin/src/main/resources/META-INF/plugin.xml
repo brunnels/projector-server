@@ -35,7 +35,7 @@
     <p>As a result, we no longer recommend using the standalone version of JetBrains Projector or merely making tweaks to incorporate it into your existing IDE servers. We won’t provide user support or quick-fixes for issues that arise when these setups are used. If you have the option to switch from Projector to Gateway, we strongly recommend you do so.</p>
     <p><a href="https://www.jetbrains.com/remote-development/gateway/">Learn more about JetBrains Gateway</a></p>
 
-    <p>Share the IDE window using the <a href="https://github.com/JetBrains/projector-server">Projector server</a>.</p>
+    <p>Share the IDE window using the <a href="https://github.com/brunnels/projector-server">Projector server</a>.</p>
     <br/>
     <p>How to use: after the plugin installation, please manually restart the IDE. New status bar widget <strong>Projector</strong> will appear in the right-hand side of the status bar.</p>
     <br/>
@@ -43,7 +43,7 @@
   ]]></description>
 
   <change-notes><![CDATA[
-    Changelog is available in <a href="https://github.com/JetBrains/projector-server/blob/master/projector-plugin/CHANGELOG.md">CHANGELOG.md</a>.
+    Changelog is available in <a href="https://github.com/brunnels/projector-server/blob/master/projector-plugin/CHANGELOG.md">CHANGELOG.md</a>.
   ]]></change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
